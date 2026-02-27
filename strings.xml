@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Aetherion Mobile NOC — English Strings
+    Developer: Mohammad Abdalftah Ibrahime
+-->
+<resources>
+    <string name="app_name">Aetherion NOC</string>
+
+    <!-- Auth -->
+    <string name="login_title">AETHERION</string>
+    <string name="login_subtitle">Network Operations Center</string>
+    <string name="login_tenant_hint">Tenant ID</string>
+    <string name="login_username_hint">Username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_mfa_hint">MFA Code</string>
+    <string name="login_button">Authenticate</string>
+    <string name="login_session_expired">Session expired. Please log in again.</string>
+    <string name="login_footer">Aetherion v8 NOC — Zero Trust Secured</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Network Dashboard</string>
+    <string name="dashboard_health_score">Network Health</string>
+    <string name="dashboard_devices">Device Inventory</string>
+    <string name="dashboard_alerts">Alert Summary</string>
+    <string name="dashboard_ai_insight">AI Insight</string>
+    <string name="dashboard_last_sync">Last sync: %s</string>
+    <string name="dashboard_sla">SLA Compliance</string>
+    <string name="dashboard_online">Online</string>
+    <string name="dashboard_offline">Offline</string>
+    <string name="dashboard_total">Total</string>
+
+    <!-- Alerts -->
+    <string name="alerts_title">Alert Center</string>
+    <string name="alerts_acknowledge">Acknowledge</string>
+    <string name="alerts_escalate">Escalate</string>
+    <string name="alerts_filter_clear">Clear Filters</string>
+    <string name="alerts_root_cause">Root cause: %s</string>
+    <string name="alerts_escalate_dialog_title">Escalate Alert</string>
+    <string name="alerts_escalate_note_hint">Escalation reason...</string>
+    <string name="alerts_empty">No alerts match current filters</string>
+
+    <!-- Devices -->
+    <string name="device_title">Device Detail</string>
+    <string name="device_information">Device Information</string>
+    <string name="device_interfaces">Interfaces</string>
+    <string name="device_metrics">Historical Metrics</string>
+    <string name="device_range_24h">24H</string>
+    <string name="device_range_7d">7D</string>
+    <string name="device_range_30d">30D</string>
+
+    <!-- Topology -->
+    <string name="topology_title">Network Topology</string>
+    <string name="topology_hint">Pinch to zoom • Tap node for details</string>
+    <string name="topology_loading">Loading topology...</string>
+    <string name="topology_view_device">View Device Detail</string>
+
+    <!-- AI Insights -->
+    <string name="ai_title">AI Insights</string>
+    <string name="ai_risk">Risk</string>
+    <string name="ai_confidence">Confidence</string>
+    <string name="ai_predicted_failure">Predicted failure: %s</string>
+    <string name="ai_recommendation">Recommendation</string>
+
+    <!-- Geo -->
+    <string name="geo_title">Geo Network View</string>
+    <string name="geo_map">Map View</string>
+    <string name="geo_regional">Regional</string>
+
+    <!-- Common -->
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
+    <string name="loading">Loading…</string>
+    <string name="error_network">Network connection failed</string>
+    <string name="error_unknown">An unexpected error occurred</string>
+
+    <!-- Notification channels -->
+    <string name="channel_critical_name">Critical Alerts</string>
+    <string name="channel_critical_desc">Carrier-grade critical network alerts</string>
+    <string name="channel_major_name">Major Alerts</string>
+    <string name="channel_minor_name">Minor Alerts</string>
+    <string name="channel_sync_name">Background Sync</string>
+
+    <!-- Severity labels -->
+    <string name="severity_critical">CRITICAL</string>
+    <string name="severity_major">MAJOR</string>
+    <string name="severity_minor">MINOR</string>
+    <string name="severity_warning">WARNING</string>
+    <string name="severity_info">INFO</string>
+
+    <!-- Notification -->
+    <string name="notification_color">#00B4D8</string>
+</resources>

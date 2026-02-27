@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Aetherion Mobile NOC — Colors & Theme
+    Developer: Mohammad Abdalftah Ibrahime
+-->
+<resources>
+    <!-- Brand -->
+    <color name="aether_blue">#00B4D8</color>
+    <color name="aether_blue_dark">#0077B6</color>
+    <color name="surface_dark">#0A0F1E</color>
+    <color name="surface_card">#111827</color>
+
+    <!-- Severity -->
+    <color name="severity_critical">#FF2D2D</color>
+    <color name="severity_major">#FF7A00</color>
+    <color name="severity_minor">#FFD600</color>
+    <color name="severity_warning">#00E5FF</color>
+
+    <!-- Notification -->
+    <color name="notification_color">#00B4D8</color>
+
+    <!-- Status bar -->
+    <color name="status_bar_color">#0A0F1E</color>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Aetherion Mobile NOC — Network Security Configuration
+    Enforces TLS 1.3, disables cleartext, certificate pinning handled in OkHttp.
+    Developer: Mohammad Abdalftah Ibrahime
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Aetherion backend: production -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">aetherion.internal</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <!-- Custom CA for internal PKI -->
+            <certificates src="@raw/aetherion_ca" />
+        </trust-anchors>
+    </domain-config>
+
+    <!-- Dev/Staging: allow custom CA -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">dev-api.aetherion.internal</domain>
+        <domain includeSubdomains="true">staging-api.aetherion.internal</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="@raw/aetherion_ca" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

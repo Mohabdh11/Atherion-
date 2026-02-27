@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Aetherion Mobile NOC — Data Extraction Rules (Android 12+)
+    Developer: Mohammad Abdalftah Ibrahime
+    Security: Exclude all sensitive data from cloud backup and device transfer.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Never back up tokens, keys, or cached network data -->
+        <exclude domain="sharedpref" path="aetherion_secure_prefs.xml"/>
+        <exclude domain="database" path="aetherion_noc.db"/>
+        <exclude domain="database" path="aetherion_noc.db-shm"/>
+        <exclude domain="database" path="aetherion_noc.db-wal"/>
+        <exclude domain="file" path="raw/aetherion_ca.pem"/>
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="aetherion_secure_prefs.xml"/>
+        <exclude domain="database" path="aetherion_noc.db"/>
+    </device-transfer>
+</data-extraction-rules>

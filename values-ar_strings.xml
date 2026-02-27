@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Aetherion Mobile NOC — Arabic Strings (RTL)
+    Developer: Mohammad Abdalftah Ibrahime
+-->
+<resources>
+    <string name="app_name">أثيريون NOC</string>
+
+    <!-- Auth -->
+    <string name="login_title">أثيريون</string>
+    <string name="login_subtitle">مركز عمليات الشبكة</string>
+    <string name="login_tenant_hint">معرّف المستأجر</string>
+    <string name="login_username_hint">اسم المستخدم</string>
+    <string name="login_password_hint">كلمة المرور</string>
+    <string name="login_mfa_hint">رمز المصادقة الثنائية</string>
+    <string name="login_button">تسجيل الدخول</string>
+    <string name="login_session_expired">انتهت الجلسة. يرجى تسجيل الدخول مجدداً.</string>
+    <string name="login_footer">أثيريون v8 NOC — مؤمّن بمبدأ الثقة الصفرية</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">لوحة مراقبة الشبكة</string>
+    <string name="dashboard_health_score">صحة الشبكة</string>
+    <string name="dashboard_devices">جرد الأجهزة</string>
+    <string name="dashboard_alerts">ملخص التنبيهات</string>
+    <string name="dashboard_ai_insight">رؤية الذكاء الاصطناعي</string>
+    <string name="dashboard_last_sync">آخر مزامنة: %s</string>
+    <string name="dashboard_sla">الامتثال لاتفاقية مستوى الخدمة</string>
+    <string name="dashboard_online">متصل</string>
+    <string name="dashboard_offline">غير متصل</string>
+    <string name="dashboard_total">الإجمالي</string>
+
+    <!-- Alerts -->
+    <string name="alerts_title">مركز التنبيهات</string>
+    <string name="alerts_acknowledge">إقرار</string>
+    <string name="alerts_escalate">تصعيد</string>
+    <string name="alerts_filter_clear">مسح المرشحات</string>
+    <string name="alerts_root_cause">السبب الجذري: %s</string>
+    <string name="alerts_escalate_dialog_title">تصعيد التنبيه</string>
+    <string name="alerts_escalate_note_hint">سبب التصعيد…</string>
+    <string name="alerts_empty">لا توجد تنبيهات تطابق المرشحات الحالية</string>
+
+    <!-- Common -->
+    <string name="retry">إعادة المحاولة</string>
+    <string name="cancel">إلغاء</string>
+    <string name="loading">جارٍ التحميل…</string>
+    <string name="error_network">فشل الاتصال بالشبكة</string>
+    <string name="error_unknown">حدث خطأ غير متوقع</string>
+
+    <!-- Topology -->
+    <string name="topology_title">طوبولوجيا الشبكة</string>
+    <string name="topology_hint">قرص للتكبير • انقر على عقدة للتفاصيل</string>
+
+    <!-- AI -->
+    <string name="ai_title">رؤى الذكاء الاصطناعي</string>
+
+    <!-- Geo -->
+    <string name="geo_title">عرض الشبكة الجغرافي</string>
+    <string name="geo_map">عرض الخريطة</string>
+    <string name="geo_regional">الإقليمي</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Aetherion Mobile NOC — Backup Rules (Android < 12)
+    Developer: Mohammad Abdalftah Ibrahime
+-->
+<full-backup-content>
+    <!-- Exclude all sensitive files from backup -->
+    <exclude domain="sharedpref" path="aetherion_secure_prefs.xml"/>
+    <exclude domain="database" path="aetherion_noc.db"/>
+    <exclude domain="database" path="aetherion_noc.db-shm"/>
+    <exclude domain="database" path="aetherion_noc.db-wal"/>
+</full-backup-content>
