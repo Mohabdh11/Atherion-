@@ -1,0 +1,169 @@
+name: AetherionNOC — Build APK
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx2g -Dorg.gradle.daemon=false"
+
+jobs:
+  build-debug:
+    name: Build Dev Debug APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle 8.7
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.7'
+
+      # ── Rebuild the Android project folder structure from flat files ──────
+      - name: Reconstruct project structure
+        run: |
+          set -e
+          ROOT=$(pwd)
+
+          # ── Gradle wrapper ────────────────────────────────────────────────
+          mkdir -p gradle/wrapper
+          mv libs.versions.toml          gradle/libs.versions.toml
+          mv gradle-wrapper.properties   gradle/wrapper/gradle-wrapper.properties
+
+          # ── App build script ──────────────────────────────────────────────
+          mkdir -p app
+          mv app_build.gradle.kts        app/build.gradle.kts
+          mv proguard-rules.pro          app/proguard-rules.pro
+
+          # ── AndroidManifest ───────────────────────────────────────────────
+          mkdir -p app/src/main
+          mv AndroidManifest.xml         app/src/main/AndroidManifest.xml
+
+          # ── Kotlin sources ────────────────────────────────────────────────
+          KT=app/src/main/kotlin/com/aetherion/noc
+          mkdir -p $KT
+          mkdir -p $KT/core/di
+          mkdir -p $KT/core/logging
+          mkdir -p $KT/core/network
+          mkdir -p $KT/core/notifications
+          mkdir -p $KT/core/security
+          mkdir -p $KT/data/local
+          mkdir -p $KT/data/remote/api
+          mkdir -p $KT/data/remote/dto
+          mkdir -p $KT/data/repository
+          mkdir -p $KT/domain/model
+          mkdir -p $KT/domain/repository
+          mkdir -p $KT/domain/usecase
+          mkdir -p $KT/presentation/ai
+          mkdir -p $KT/presentation/alerts
+          mkdir -p $KT/presentation/auth
+          mkdir -p $KT/presentation/common/navigation
+          mkdir -p $KT/presentation/common/theme
+          mkdir -p $KT/presentation/dashboard
+          mkdir -p $KT/presentation/device
+          mkdir -p $KT/presentation/geo
+          mkdir -p $KT/presentation/topology
+
+          mv AetherionApp.kt                   $KT/AetherionApp.kt
+          mv AppModule.kt                      $KT/core/di/AppModule.kt
+          mv SystemModule.kt                   $KT/core/di/SystemModule.kt
+          mv AetherionTree.kt                  $KT/core/logging/AetherionTree.kt
+          mv NetworkInterceptors.kt            $KT/core/network/NetworkInterceptors.kt
+          mv AetherionFirebaseService.kt       $KT/core/notifications/AetherionFirebaseService.kt
+          mv SecurityManager.kt                $KT/core/security/SecurityManager.kt
+          mv AetherionDatabase.kt              $KT/data/local/AetherionDatabase.kt
+          mv AetherionApi.kt                   $KT/data/remote/api/AetherionApi.kt
+          mv Dtos.kt                           $KT/data/remote/dto/Dtos.kt
+          mv Mappers.kt                        $KT/data/remote/dto/Mappers.kt
+          mv AuthRepositoryImpl.kt             $KT/data/repository/AuthRepositoryImpl.kt
+          mv RepositoryImpls.kt                $KT/data/repository/RepositoryImpls.kt
+          mv Models.kt                         $KT/domain/model/Models.kt
+          mv Repositories.kt                   $KT/domain/repository/Repositories.kt
+          mv UseCases.kt                       $KT/domain/usecase/UseCases.kt
+          mv MainActivity.kt                   $KT/presentation/MainActivity.kt
+          mv AiInsightsScreen.kt               $KT/presentation/ai/AiInsightsScreen.kt
+          mv AlertCenterScreen.kt              $KT/presentation/alerts/AlertCenterScreen.kt
+          mv AlertViewModel.kt                 $KT/presentation/alerts/AlertViewModel.kt
+          mv AuthViewModel.kt                  $KT/presentation/auth/AuthViewModel.kt
+          mv LoginScreen.kt                    $KT/presentation/auth/LoginScreen.kt
+          mv NavGraph.kt                       $KT/presentation/common/navigation/NavGraph.kt
+          mv Theme.kt                          $KT/presentation/common/theme/Theme.kt
+          mv DashboardScreen.kt                $KT/presentation/dashboard/DashboardScreen.kt
+          mv DashboardViewModel.kt             $KT/presentation/dashboard/DashboardViewModel.kt
+          mv DeviceDetailScreen.kt             $KT/presentation/device/DeviceDetailScreen.kt
+          mv GeoNetworkScreen.kt               $KT/presentation/geo/GeoNetworkScreen.kt
+          mv TopologyScreen.kt                 $KT/presentation/topology/TopologyScreen.kt
+
+          # ── Test sources ──────────────────────────────────────────────────
+          mkdir -p app/src/test/kotlin/com/aetherion/noc
+          mkdir -p app/src/androidTest/kotlin/com/aetherion/noc
+          mv UseCaseTests.kt       app/src/test/kotlin/com/aetherion/noc/UseCaseTests.kt
+          mv IntegrationTests.kt   app/src/androidTest/kotlin/com/aetherion/noc/IntegrationTests.kt
+
+          # ── Resources ─────────────────────────────────────────────────────
+          mkdir -p app/src/main/res/drawable
+          mkdir -p app/src/main/res/mipmap-anydpi-v26
+          mkdir -p app/src/main/res/mipmap-mdpi
+          mkdir -p app/src/main/res/mipmap-hdpi
+          mkdir -p app/src/main/res/mipmap-xhdpi
+          mkdir -p app/src/main/res/mipmap-xxhdpi
+          mkdir -p app/src/main/res/mipmap-xxxhdpi
+          mkdir -p app/src/main/res/values
+          mkdir -p app/src/main/res/values-ar
+          mkdir -p app/src/main/res/xml
+
+          mv ic_launcher_background.xml        app/src/main/res/drawable/ic_launcher_background.xml
+          mv ic_launcher_foreground.xml        app/src/main/res/drawable/ic_launcher_foreground.xml
+          mv ic_launcher.xml                   app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+          mv ic_launcher_round.xml             app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+          mv ic_launcher.png                   app/src/main/res/mipmap-xhdpi/ic_launcher.png
+          mv ic_launcher_round.png             app/src/main/res/mipmap-xhdpi/ic_launcher_round.png
+          mv mipmap-hdpi_ic_launcher.png       app/src/main/res/mipmap-hdpi/ic_launcher.png
+          mv mipmap-hdpi_ic_launcher_round.png app/src/main/res/mipmap-hdpi/ic_launcher_round.png
+          mv mipmap-mdpi_ic_launcher.png       app/src/main/res/mipmap-mdpi/ic_launcher.png
+          mv mipmap-mdpi_ic_launcher_round.png app/src/main/res/mipmap-mdpi/ic_launcher_round.png
+          mv mipmap-xxhdpi_ic_launcher.png     app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+          mv mipmap-xxhdpi_ic_launcher_round.png app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png
+          mv mipmap-xxxhdpi_ic_launcher.png    app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+          mv mipmap-xxxhdpi_ic_launcher_round.png app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png
+          mv colors.xml                        app/src/main/res/values/colors.xml
+          mv strings.xml                       app/src/main/res/values/strings.xml
+          mv themes.xml                        app/src/main/res/values/themes.xml
+          mv values-ar_strings.xml             app/src/main/res/values-ar/strings.xml
+          mv backup_rules.xml                  app/src/main/res/xml/backup_rules.xml
+          mv data_extraction_rules.xml         app/src/main/res/xml/data_extraction_rules.xml
+          mv network_security_config.xml       app/src/main/res/xml/network_security_config.xml
+
+          chmod +x gradlew
+
+          echo "✅ Project structure ready"
+          find . -not -path './.git/*' -type f | sort
+
+      # ── Build ─────────────────────────────────────────────────────────────
+      - name: Build devDebug APK
+        run: gradle assembleDevDebug --no-daemon --stacktrace
+
+      - name: Rename APK
+        run: |
+          mkdir -p artifacts
+          APK=$(find app/build/outputs/apk/dev/debug -name "*.apk" | head -1)
+          cp "$APK" "artifacts/AetherionNOC-dev-debug-${GITHUB_SHA::8}.apk"
+          echo "APK: artifacts/AetherionNOC-dev-debug-${GITHUB_SHA::8}.apk"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AetherionNOC-dev-debug-${{ github.sha }}
+          path: artifacts/*.apk
+          retention-days: 14
